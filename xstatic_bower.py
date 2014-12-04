@@ -171,5 +171,10 @@ def main():
     with open(join(xstatic_dir, 'pkg', name, '__init__.py'), 'w') as f:
         f.write(__INIT__TEMPLATE.format(**locals()))
 
+    print '\nCongratulations, please find your new XStatic-{} package in' \
+        .format(display_name)
+    print join('xstatic_packages', name), '\n'
+
+
 if __name__ == '__main__':
     main()
