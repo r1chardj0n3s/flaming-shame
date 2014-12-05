@@ -138,7 +138,9 @@ def main():
     if subprocess.call('node_modules/.bin/bower install {}'.format(
             bower_package), shell=True):
         return
-    name = bower_package.lower()
+
+    # safe name for Python package - lowercase and replace dashes
+    name = bower_package.lower().replace('-', '_')
 
     with open(join('bower_components', bower_package, '.bower.json')) as f:
         bower_json = json.load(f)
