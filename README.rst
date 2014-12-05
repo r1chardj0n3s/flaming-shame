@@ -3,7 +3,7 @@ xstatic packages from bower
 ===========================
 
 To create an xstatic package from a bower package, clone this repository
-and run:
+and run::
 
    tox -e xstatic <name of bower package>
 
