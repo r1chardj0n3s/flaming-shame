@@ -10,7 +10,7 @@ and run::
 The result should be a directory in `xstatic_packages/<name of package>`
 which contains a PyPI-compatible xstatic package ready for release.
 
-So, for example, to release an xstatic version of angular-smart-table:
+So, for example, to release an xstatic version of angular-smart-table::
 
     $ git clone https://github.com/r1chardj0n3s/flaming-shame.git
     [install "tox" and "wheel" if you don't have them already]
