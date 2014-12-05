@@ -163,7 +163,8 @@ def main():
 
     # make that deep directory
     xstatic_dir = join('xstatic_packages', name, 'xstatic')
-    shutil.rmtree(xstatic_dir)
+    if os.path.exists(xstatic_dir):
+        shutil.rmtree(xstatic_dir)
     os.makedirs(join(xstatic_dir, 'pkg', name))
     with open(join(xstatic_dir, '__init__.py'), 'w') as f:
         f.write("__import__('pkg_resources').declare_namespace(__name__)\n")
