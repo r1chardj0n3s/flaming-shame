@@ -132,6 +132,16 @@ global-exclude *.orig
 global-exclude *.rej
 '''
 
+# GLOB patterns of files/directories to ignore
+FILES_TO_EXCLUDE = '''
+.gitignore .git
+.travis.yml
+.bower.json bower.json
+package.json
+gulpFile.js
+*.md
+'''
+
 
 def main():
     bower_package = sys.argv[1]
@@ -174,8 +184,11 @@ def main():
         f.write("__import__('pkg_resources').declare_namespace(__name__)\n")
 
     # copy over the data
-    shutil.copytree(join('bower_components', bower_package),
-        join(xstatic_dir, 'pkg', name, 'data'))
+    shutil.copytree(
+        join('bower_components', bower_package),
+        join(xstatic_dir, 'pkg', name, 'data'),
+        ignore=shutil.ignore_patterns(*FILES_TO_EXCLUDE.split())
+    )
 
     # write the package meta-data
     with open(join('xstatic_packages', name, 'README.txt'), 'w') as f:
