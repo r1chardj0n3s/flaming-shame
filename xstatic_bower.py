@@ -46,7 +46,7 @@ DESCRIPTION = "%s %s (XStatic packaging standard)" % (DISPLAY_NAME, VERSION)
 
 PLATFORMS = 'any'
 CLASSIFIERS = []
-KEYWORDS = '{keywords}'
+KEYWORDS = {keywords}
 
 # XStatic-* package maintainer:
 {maintainer}
@@ -140,6 +140,7 @@ FILES_TO_EXCLUDE = '''
 package.json
 gulpFile.js
 *.md
+.npmignore
 '''
 
 
@@ -160,10 +161,11 @@ def main():
     underline = '-' * len('xstatic-' + display_name)
     homepage = bower_json['homepage']
     if 'main' in bower_json:
-        main = "MAIN='{}'".format(bower_json['main'])
+        main = "MAIN={}".format(repr(bower_json['main']))
     else:
         main = ''
-    keywords = ' '.join(bower_json.get('keywords', []) + [name, 'xstatic'])
+    keywords = repr(' '.join(bower_json.get('keywords', [])
+                             + [name, 'xstatic']))
 
     # TODO? (I'm not sure this stuff even exists in bower)
     cdn_locations = ''
@@ -200,8 +202,8 @@ def main():
     with open(join(xstatic_dir, 'pkg', name, '__init__.py'), 'w') as f:
         f.write(__INIT__TEMPLATE.format(**locals()))
 
-    print '\nCongratulations, please find your new XStatic-{} package in' \
-        .format(display_name)
+    print '\nCongratulations, please find your new XStatic-{} package ' \
+        'version {} in'.format(display_name, version)
     print join('xstatic_packages', name), '\n'
 
 
