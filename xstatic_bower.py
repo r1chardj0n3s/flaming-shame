@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import gitconfig
+from gitconfig import *
 import json
 import os
 import shutil
@@ -171,9 +171,8 @@ def main():
     cdn_locations = ''
 
     # grab maintainer info from git config
-    git = gitconfig.config("~/.gitconfig")
     maintainer = "MAINTAINER = '{}'\nMAINTAINER_EMAIL = '{}'".format(
-        git.user.name, git.user.email)
+        gitconfig.user.name, gitconfig.user.email)
 
     # make that deep directory
     xstatic_dir = join('xstatic_packages', name, 'xstatic')
